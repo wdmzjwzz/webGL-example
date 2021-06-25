@@ -1,11 +1,8 @@
 import { Application } from "./common/Application";
 import { MeshBuilderApplicaton } from "./demo/MeshBuilderApplication";
-import { Q3BspApplication } from "./demo/Q3BspApplication";
-import { Doom3Application } from "./demo/Doom3Application";
 import { RotatingCubeApplication } from "./demo/RotatingCubeApplication";
 import { CoordSystemApplication } from "./demo/CoordSystemApplicationDemo";
 import { BasicWebGLApplication } from "./demo/BasicWebGLApplication";
-import { MD5SkinedMeshApplication } from "./demo/MD5SkinedMeshApplication";
 import { AsyncLoadTestApplication } from "./demo/AsyncLoadTestApplication";
 
 // 获得HTMLSelectElement对象，用来切换要运行的Application
@@ -79,21 +76,6 @@ function runApplication(name:EAPPName):void{
         let app: CoordSystemApplication = new CoordSystemApplication( canvas );
         app.frameCallback = frameCallback;
         app.run();
-    } else if ( name === EAPPName.Q3BSP )
-    {
-        let app: Application = new Q3BspApplication( canvas );
-        app.frameCallback = frameCallback;
-        app.run();
-    } else if ( name === EAPPName.DOOM3PROC )
-    {
-        let app: Doom3Application = new Doom3Application( canvas );
-        app.frameCallback = frameCallback;
-        app.run();
-    } else if ( name === EAPPName.DOOM3MD5 )
-    {
-        let app: MD5SkinedMeshApplication = new MD5SkinedMeshApplication( canvas );
-        app.frameCallback = frameCallback;
-        app.run();
     }
 }
 
@@ -116,57 +98,8 @@ function frameCallback ( app: Application ): void
     verts.nodeValue = "0";
 }
 
-/*
-select.onchange = (): void =>
-{
-    // 获取用于获得webgl上下文对象的HTMLCanvasElement元素
-    let canvas: HTMLCanvasElement | null = document.getElementById( 'webgl' ) as HTMLCanvasElement;
-    if ( select.selectedIndex === 0 )
-    {
-        let app: RotatingCubeApplication = new RotatingCubeApplication( canvas );
-        app.frameCallback = frameCallback;
-        app.run();
-    } else if ( select.selectedIndex === 1 )
-    {
-        let app:AsyncLoadTestApplication = new AsyncLoadTestApplication(canvas);
-        app.run();
-    } else if ( select.selectedIndex === 2 )
-    {
-        let app:Application = new BasicWebGLApplication(canvas);
-        app.frameCallback = frameCallback;
-        app.run();
-    } else if ( select.selectedIndex === 3 )
-    {
-        let app: Application = new MeshBuilderApplicaton( canvas );
-        app.frameCallback = frameCallback;
-        app.start();
-    } else if ( select.selectedIndex === 4 )
-    {
-        let app: CoordSystemApplication = new CoordSystemApplication( canvas );
-        app.frameCallback = frameCallback;
-        app.run();
-    } else if ( select.selectedIndex === 5 )
-    {
-        let app: Application = new Q3BspApplication( canvas );
-        app.frameCallback = frameCallback;
-        app.run();
-    } else if ( select.selectedIndex === 6 )
-    {
-        let app: Doom3Application = new Doom3Application( canvas );
-        app.frameCallback = frameCallback;
-        app.run();
-    } else if ( select.selectedIndex === 7 )
-    {
-        let app: MD5SkinedMeshApplication = new MD5SkinedMeshApplication( canvas );
-        app.frameCallback = frameCallback;
-        app.run();
-    }
-}
-*/
 
-//addItemes( select );
-
-// runApplication(EAPPName.ROTATINGCUBE);
+runApplication(EAPPName.ROTATINGCUBE);
 //runApplication(EAPPName.ASYNCLOAD);
 //runApplication(EAPPName.BASICWEBGL);
 // runApplication(EAPPName.MESHBUILDER);
