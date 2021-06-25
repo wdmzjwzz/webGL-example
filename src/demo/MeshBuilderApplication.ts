@@ -12,8 +12,7 @@ import { GLTexture } from "../webgl/WebGLTexture";
 import { Cube, GeometryData } from "../lib/Primitives";
 import { EAxisType } from "../common/math/MathHelper";
 
-export class MeshBuilderApplicaton extends CameraApplication
-{
+export class MeshBuilderApplicaton extends CameraApplication {
     public colorShader: GLProgram;      // 颜色着色器
     public textureShader: GLProgram;    // 纹理着色器
     public texture: GLTexture;          // 纹理着色器所使用的纹理对象
@@ -33,8 +32,7 @@ export class MeshBuilderApplicaton extends CameraApplication
     //public currentDrawMethod: Function; 
     public currentDrawMethod: () => void;
 
-    private setViewport ( coord: GLCoordSystem ): void
-    {
+    private setViewport ( coord: GLCoordSystem ): void {
         // camera的setViewport方法内部会调用:
         // 1、gl.viewport ( x , y , width , height )方法
         // 2、gl.scissor ( x , y , width , height )方法
@@ -43,8 +41,7 @@ export class MeshBuilderApplicaton extends CameraApplication
         this.camera.setViewport( coord.viewport[ 0 ], coord.viewport[ 1 ], coord.viewport[ 2 ], coord.viewport[ 3 ] );
     }
 
-    public constructor ( canvas: HTMLCanvasElement )
-    {
+    public constructor ( canvas: HTMLCanvasElement ) {
         super( canvas );
         // 使用default纹理和着色器
         this.texture = GLTextureCache.instance.getMust( "default" );
@@ -65,16 +62,14 @@ export class MeshBuilderApplicaton extends CameraApplication
         this.currentDrawMethod = this.drawByMatrixWithColorShader;
     }
 
-    public update ( elapsedMsec: number, intervalSec: number ): void
-    {
+    public update ( elapsedMsec: number, intervalSec: number ): void {
         // 每帧旋转1度
         this.angle += 1;
         // 调用基类方法，这样就能让摄像机进行更新
         super.update( elapsedMsec, intervalSec );
     }
 
-    public drawByMatrixWithColorShader (): void
-    {
+    public drawByMatrixWithColorShader (): void {
         // 很重要，由于我们后续使用多视口渲染，因此必须要调用camera的setviewport方法
         this.camera.setViewport( 0, 0, this.canvas.width, this.canvas.height );
         // 使用cleartColor方法设置当前颜色缓冲区背景色是什么颜色
@@ -132,7 +127,7 @@ export class MeshBuilderApplicaton extends CameraApplication
         this.gl.enable( this.gl.CULL_FACE );
     }
 
-    
+
     private cubeTexCoords: number[] = [
         0, 0.5, 0.5, 0.5, 0.5, 1, 0, 1,  // 0区映射到立方体的前面
         0.5, 0.5, 1, 0.5, 1, 1, 0.5, 1,  // 1区映射到立方体的右面
@@ -142,8 +137,7 @@ export class MeshBuilderApplicaton extends CameraApplication
         0, 0, 1, 0, 1, 1, 0, 1 // 整个贴图映射到立方体的下面
     ];
 
-    public drawByMultiViewportsWithTextureShader (): void
-    {
+    public drawByMultiViewportsWithTextureShader (): void {
         // 第一步，设置viewport
         this.setViewport( this.coords[ 0 ] );
         // 第二步，设置viewport的背景色（可选，如果你不想使用default深灰色的背景色）
@@ -228,21 +222,17 @@ export class MeshBuilderApplicaton extends CameraApplication
         }
     }
 
-    public render (): void
-    {
+    public render (): void {
         // 调用的的currentDrawMethod这个回调函数，该函数指向当前要渲染的页面方法
         this.currentDrawMethod();
     }
 
-    public onKeyPress ( evt: CanvasKeyBoardEvent ): void
-    {
+    public onKeyPress ( evt: CanvasKeyBoardEvent ): void {
         super.onKeyPress( evt ); // 调用基类方法，这样摄像机键盘事件全部有效了
-        if ( evt.key === "1" )
-        {
+        if ( evt.key === "1" ) {
             // 将currentDrawMethod函数指针指向drawByMatrixWithColorShader方法
             this.currentDrawMethod = this.drawByMatrixWithColorShader;
-        } else if ( evt.key === "2" )
-        {
+        } else if ( evt.key === "2" ) {
             // 将currentDrawMethod函数指针指向drawByMultiViewportsWithTextureShader方法
             this.currentDrawMethod = this.drawByMultiViewportsWithTextureShader;
         }

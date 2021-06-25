@@ -70,7 +70,7 @@ export class RotatingCubeApplication extends CameraApplication {
     }
     protected onWheel ( evt: any ) {
         evt.preventDefault();
-        console.log( this.camera.type )
+      
         if ( !evt.ctrlKey ) {
             if ( evt.deltaY > 0 ) {
                 this.camera.moveUpward( 1 )

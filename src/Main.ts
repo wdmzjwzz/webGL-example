@@ -104,9 +104,6 @@ runApplication(EAPPName.ROTATINGCUBE);
 //runApplication(EAPPName.BASICWEBGL);
 // runApplication(EAPPName.MESHBUILDER);
 // runApplication(EAPPName.COORDSYSTEM);
-// runApplication(EAPPName.Q3BSP);
-//runApplication(EAPPName.DOOM3PROC);
-// runApplication(EAPPName.DOOM3MD5);
 
 
 

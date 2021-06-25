@@ -131,7 +131,7 @@ export class GLHelper {
         // 检查编译错误
         if ( gl.getShaderParameter( shader, gl.COMPILE_STATUS ) === false ) {
             // 如果编译出现错误，则弹出对话框，了解错误的原因
-            alert( gl.getShaderInfoLog( shader ) );
+            console.error( gl.getShaderInfoLog( shader ) );
             // 然后将shader删除掉，防止内存泄漏
             gl.deleteShader( shader );
             // 编译错误返回false
